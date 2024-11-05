@@ -4,7 +4,7 @@
 
 Name:           libproxy
 Version:        0.4.15
-Release:        5.2%{?dist}
+Release:        5.5%{?dist}
 Summary:        A library handling all the details of proxy configuration
 
 Group:          System Environment/Libraries
@@ -14,6 +14,12 @@ Source0:        https://github.com/libproxy/%{name}/archive/%{version}.tar.gz
 # Taken from the Debian package.
 Source1:        proxy.1
 Patch1:         libproxy-0.4.11-crash.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1880350
+Patch2:         libproxy-0.4.15-fix-CVE-2020-25219.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1883584
+Patch3:         libproxy-0.4.15-fix-pac-buffer-overflow.patch
 
 BuildRequires:  libmodman-devel >= 2.0.1
 BuildRequires:  cmake >= 2.6.0
@@ -181,6 +187,15 @@ make test
 
 
 %changelog
+* Thu Aug 15 2024 Michael Santana <msantana@redhat.com> - 0.4.15-5.5
+- Bump up version number
+
+* Tue Jul 30 2024 Michael Santana <msantana@redhat.com> - 0.4.15-5.4
+- Fix PAC buffer overflow (#1869639)
+
+* Tue Jul 30 2024 Michael Santana <msantana@redhat.com> - 0.4.15-5.3
+- Fix CVE-2020-25219 (#1880349)
+
 * Thu May 31 2018 Dan Winship <danw@redhat.com> - 0.4.15-5.2
 - Drop pacrunner-mozjs (#1571640)
 
